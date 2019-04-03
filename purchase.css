@@ -380,7 +380,8 @@ main.checkscreen > .deliverybox {
 }
 
 .deliverybox > h3,
-.paymethodbox > h3 {
+.paymethodbox > h3,
+.summarybox > h3 {
   margin: 0;
   margin-bottom: 10px;
 }

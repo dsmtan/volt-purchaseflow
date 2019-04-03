@@ -64,4 +64,5 @@ form.addEventListener("submit", e => {
   };
   console.log(form.reportValidity());
   post(submittedAccount);
+  window.location.href = "checkorder.html";
 });
