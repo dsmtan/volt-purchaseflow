@@ -62,7 +62,12 @@ form.addEventListener("submit", e => {
     phoneno: form.elements.phoneno.value,
     marketing: marketingStatus
   };
+
+  if (form.reportValidity() == true) {
+    post(submittedAccount);
+    window.location.href = "checkorder.html";
+  } else {
+    form.elements.submit.disabled = false;
+  }
   console.log(form.reportValidity());
-  post(submittedAccount);
-  window.location.href = "checkorder.html";
 });
