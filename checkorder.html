@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="purchase.css" />
     <title>Purchase Flow Volt</title>
   </head>
-  <body class="paymentbody">
-    <h2>Progress bar</h2>
+  <body class="checkbody">
+    <div class="purchaseheader">
+      <img id="basketlogo" class="logo" src="images/logoblack.png" />
+      <img class="progressbar" src="images/progress3.png" />
+    </div>
 
-    <main class="paymentscreen">
+    <main class="checkscreen">
       <div class="deliverybox">
         <h3>Choose Powerbank Delivery Method:</h3>
 
@@ -21,7 +24,7 @@
           >
 
           <input id="shiphome" type="radio" name="delivery" value="shiphome" />
-          <label class="delivery-label" for="shiphome"
+          <label id="shiplabel" class="delivery-label" for="shiphome"
             >Ship to my home address for 50 DKK</label
           >
         </form>
@@ -65,28 +68,29 @@
 
         <table id="ordertable">
           <tr>
-            <td>X QTY</td>
+            <td id="swapnumber">1</td>
             <td>x Swapping Service</td>
-            <td class="sum">sum DKK</td>
+            <td id="swaptotal" class="sum">179 DKK</td>
           </tr>
 
           <tr>
-            <td>X QTY</td>
+            <td id="powernumber">1</td>
             <td>x Powerbank Deposit</td>
-            <td class="sum">sum DKK</td>
+            <td id="powertotal" class="sum">200 DKK</td>
           </tr>
+
           <tr>
             <td colspan="2">Shipping</td>
-            <td class="sum">sum DKK</td>
+            <td id="shippingprice" class="sum">0 DKK</td>
           </tr>
 
           <tr id="totalrow">
             <td colspan="2"><h4 id="totalamount">Total amount:</h4></td>
-            <td class="sum bold">sum DKK</td>
+            <td id="totalsum" class="sum bold">379 DKK</td>
           </tr>
           <tr>
             <td colspan="2">Incl. 25% VAT</td>
-            <td class="sum">sum DKK</td>
+            <td id="totalvat" class="sum">76 DKK</td>
           </tr>
         </table>
       </div>
@@ -99,6 +103,6 @@
 
       <a class="backBtn" href="signup.html"> Back</a>
     </main>
-    <script src="purchase.js"></script>
+    <script src="js/checkorder.js"></script>
   </body>
 </html>

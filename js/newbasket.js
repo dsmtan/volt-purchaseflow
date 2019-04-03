@@ -14,10 +14,20 @@ const powerTotal = document.querySelector("#powertotal");
 const totalSum = document.querySelector("#totalsum");
 const totalVAT = document.querySelector("#totalvat");
 
+//default basket
+let currentPrices = {
+  swaptotal: 179,
+  powertotal: 200,
+  totalprice: 379,
+  vatprice: 76
+};
+
 function init() {
+  console.log(currentPrices);
   swapQty.addEventListener("input", updateTotals, false);
   powerQty.addEventListener("input", updateTotals, false);
 }
+init();
 
 function updateTotals() {
   swapNumber.textContent = swapQty.value;
@@ -30,9 +40,20 @@ function updateTotals() {
   powerTotal.textContent = powerPrice + " DKK";
 
   let totalPrice = swapPrice + powerPrice;
+  let vatPrice = Math.round((totalPrice / 125) * 25);
 
   totalSum.textContent = totalPrice + " DKK";
-  totalVAT.textContent = Math.round((totalPrice / 125) * 25) + " DKK";
+  totalVAT.textContent = vatPrice + " DKK";
+
+  // store prices in object currentPrices
+  currentPrices = {
+    swapprice: swapPrice,
+    powerprice: powerPrice,
+    totalprice: totalPrice,
+    vatprice: vatPrice
+  };
+
+  console.log(currentPrices);
 }
 
-init();
+//when submit button is clicked, currentPrices is stored in restdb

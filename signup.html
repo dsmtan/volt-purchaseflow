@@ -8,7 +8,10 @@
     <title>Purchase Flow Volt</title>
   </head>
   <body class="signupbody">
-    <h2>Progress bar</h2>
+    <div class="purchaseheader">
+      <img id="basketlogo" class="logo" src="images/logoblack.png" />
+      <img class="progressbar" src="images/progress2.png" />
+    </div>
 
     <main class="signupscreen">
       <div class="loginbox">
@@ -52,7 +55,7 @@
           <label for="email">E-mail:</label>
           <input type="email" class="field" name="email" required />
 
-          <label for="password">Password (min. 8 characters):</label>
+          <label for="password">Password:</label>
           <input
             type="password"
             id="password"
@@ -375,31 +378,31 @@
           />
 
           <div id="marketingemail">
-                <input
-                id="marketing"
-                type="checkbox"
-                name="marketing"
-                value="marketing"
-              />
+            <input
+              id="marketing"
+              type="checkbox"
+              name="marketing"
+              value="marketing"
+            />
             <label id="marketinglabel" for="marketing">
-              I would like to receive discounts and other marketing
-              news from Volt.</label
+              I would like to receive discounts and other marketing news from
+              Volt.</label
             >
-        
           </div>
 
           <input
             id="signupBtn"
             class="continueBtn"
             type="submit"
+            name="submit"
             value="Sign up"
           />
         </form>
       </div>
 
       <a class="backBtn" href="newbasket.html">Back</a>
-      <a class="backBtn" href="payment.html">Skip (temporary)</a>
+      <a class="backBtn" href="checkorder.html">Skip (for development)</a>
     </main>
-    <script src="purchase.js"></script>
+    <script src="js/signup.js"></script>
   </body>
 </html>
