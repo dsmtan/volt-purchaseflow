@@ -33,6 +33,7 @@ function post(newAccount) {
     .then(data => {
       form.elements.submit.disabled = false;
       console.log(data);
+      window.location.href = "checkorder.html";
     });
 }
 
@@ -65,7 +66,6 @@ form.addEventListener("submit", e => {
 
   if (form.reportValidity() == true) {
     post(submittedAccount);
-    window.location.href = "checkorder.html";
   } else {
     form.elements.submit.disabled = false;
   }

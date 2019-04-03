@@ -16,10 +16,12 @@ const totalVAT = document.querySelector("#totalvat");
 
 //default basket
 let currentPrices = {
-  swaptotal: 179,
-  powertotal: 200,
+  swapprice: 179,
+  powerprice: 200,
   totalprice: 379,
-  vatprice: 76
+  vatprice: 76,
+  swapquantity: 1,
+  powerquantity: 1
 };
 
 function init() {
@@ -50,10 +52,38 @@ function updateTotals() {
     swapprice: swapPrice,
     powerprice: powerPrice,
     totalprice: totalPrice,
-    vatprice: vatPrice
+    vatprice: vatPrice,
+    swapquantity: swapQty.value,
+    powerquantity: powerQty.value
   };
 
   console.log(currentPrices);
 }
 
 //when submit button is clicked, currentPrices is stored in restdb
+
+function post(newPrices) {
+  fetch("https://denisekea-93a9.restdb.io/rest/volt-prices", {
+    method: "post",
+    body: JSON.stringify(newPrices),
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+      "x-apikey": "5c85985ecac6621685acbd92",
+      "cache-control": "no-cache"
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      window.location.href = "signup.html";
+    });
+}
+
+const submitPricesBtn = document.querySelector("#submitPrices");
+
+submitPricesBtn.addEventListener("click", sendPrices);
+
+function sendPrices() {
+  event.preventDefault();
+  post(currentPrices);
+}
