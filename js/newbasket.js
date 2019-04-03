@@ -63,7 +63,7 @@ function updateTotals() {
 //when submit button is clicked, currentPrices is stored in restdb
 
 function post(newPrices) {
-  fetch("https://denisekea-93a9.restdb.io/rest/volt-prices", {
+  fetch("https://denisekea-93a9.restdb.io/rest/volt-quantities", {
     method: "post",
     body: JSON.stringify(newPrices),
     headers: {

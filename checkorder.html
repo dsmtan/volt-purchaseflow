@@ -63,6 +63,7 @@
             type="radio"
             name="payment"
             value="creditcard"
+            required
           />
           <label class="payimg creditcard" for="creditcard"></label>
 
@@ -94,13 +95,13 @@
           <tr>
             <td id="swapnumber">1</td>
             <td>x Swapping Service</td>
-            <td id="swaptotal" class="sum">179 DKK</td>
+            <td id="swaptotal" class="sum"></td>
           </tr>
 
           <tr>
             <td id="powernumber">1</td>
             <td>x Powerbank Deposit</td>
-            <td id="powertotal" class="sum">200 DKK</td>
+            <td id="powertotal" class="sum"></td>
           </tr>
 
           <tr>
@@ -110,20 +111,18 @@
 
           <tr id="totalrow">
             <td colspan="2"><h4 id="totalamount">Total amount:</h4></td>
-            <td id="totalsum" class="sum bold">379 DKK</td>
+            <td id="totalsum" class="sum bold"></td>
           </tr>
           <tr>
             <td colspan="2">Incl. 25% VAT</td>
-            <td id="totalvat" class="sum">76 DKK</td>
+            <td id="totalvat" class="sum"></td>
           </tr>
         </table>
       </div>
 
-      <a id="continue" href="">
-        <button class="continueBtn">
-          Continue to Payment
-        </button>
-      </a>
+      <button id="submitOrder" class="continueBtn">
+        Continue to Payment
+      </button>
 
       <a class="backBtn" href="signup.html"> Back</a>
     </main>
