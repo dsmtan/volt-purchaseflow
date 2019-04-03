@@ -436,6 +436,25 @@ form.deliverymethod input {
   border: 2px solid #fa9d36;
 }
 
+form.deliverymethod > div > input.addressinfo {
+  border: 1px solid lightgrey;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+input#shipaddress1 {
+  width: 90%;
+}
+
+input#shipaddress2 {
+  width: 6em;
+}
+
+input#shipaddress3 {
+  width: 65%;
+}
+
 /* payment method form */
 
 form.cc-selector input {

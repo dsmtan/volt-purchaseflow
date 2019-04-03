@@ -20,13 +20,37 @@
         <form class="deliverymethod">
           <input id="freepickup" type="radio" name="delivery" value="pickup" />
           <label class="delivery-label" for="freepickup">
-            Pick up at festival of Volt CPH for FREE</label
+            Pick up at festival or Volt CPH for FREE</label
           >
 
           <input id="shiphome" type="radio" name="delivery" value="shiphome" />
           <label id="shiplabel" class="delivery-label" for="shiphome"
             >Ship to my home address for 50 DKK</label
           >
+          <div id="shippinginfo" class="hide">
+            <input
+              id="shipaddress1"
+              class="addressinfo"
+              type="text"
+              name="address"
+              placeholder="Street"
+            />
+            <input
+              id="shipaddress2"
+              class="addressinfo"
+              type="text"
+              name="zip"
+              placeholder="Postcode"
+            />
+
+            <input
+              id="shipaddress3"
+              class="addressinfo"
+              type="text"
+              name="city"
+              placeholder="City"
+            />
+          </div>
         </form>
       </div>
 
