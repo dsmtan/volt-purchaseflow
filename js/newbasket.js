@@ -3,7 +3,7 @@
 // NEW USER BASKET
 
 //VAT = (total amount / 125) * 25
-
+const submitPricesBtn = document.querySelector("#submitPrices");
 const swapQty = document.querySelector("#swapqty"); //input
 const swapNumber = document.querySelector("#swapnumber"); //table output
 const swapTotal = document.querySelector("#swaptotal");
@@ -26,6 +26,10 @@ function init() {
   console.log(currentQuantities);
   swapQty.addEventListener("input", updateTotals, false);
   powerQty.addEventListener("input", updateTotals, false);
+
+  submitPricesBtn.addEventListener("click", () => {
+    window.location.href = "signup.html";
+  });
 }
 init();
 
@@ -52,12 +56,4 @@ function updateTotals() {
 
   //adjust chosen quantities in localStorage
   window.localStorage.setItem("qtyObject", JSON.stringify(currentQuantities));
-}
-
-const submitPricesBtn = document.querySelector("#submitPrices");
-
-submitPricesBtn.addEventListener("click", sendPrices);
-
-function sendPrices() {
-  window.location.href = "signup.html";
 }
