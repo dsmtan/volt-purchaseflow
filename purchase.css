@@ -121,12 +121,11 @@ main.startscreen {
 .startscreen > a > div {
   height: 100px;
   width: 400px;
-  background-color: white;
+  background-color: #fcc586;
   margin: 1em auto;
   text-align: center;
   padding: 2.5em;
   border-radius: 5px;
-  border: 2px solid rgb(176, 179, 168);
 }
 
 .startscreen > a > div:hover {
