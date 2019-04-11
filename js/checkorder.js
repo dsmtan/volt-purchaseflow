@@ -126,7 +126,9 @@ function post(newOrder) {
     .then(res => res.json())
     .then(data => {
       console.log(data);
-      alert("Your order is placed");
+      alert(
+        "Your order is placed in https://denisekea-93a9.restdb.io/rest/volt-orders"
+      );
     });
 }
 
