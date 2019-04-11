@@ -17,57 +17,58 @@ registerOverlay.addEventListener("click", () => {
   loginOverlay.classList.remove("hide");
 });
 
-//add registration form to restdb
+const registerForm = document.querySelector("#registerform");
+registerForm.setAttribute("novalidate", true);
 
-function post(newAccount) {
-  fetch("https://denisekea-93a9.restdb.io/rest/volt-accounts", {
-    method: "post",
-    body: JSON.stringify(newAccount),
-    headers: {
-      "content-type": "application/json; charset=utf-8",
-      "x-apikey": "5c85985ecac6621685acbd92",
-      "cache-control": "no-cache"
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      form.elements.submit.disabled = false;
-      console.log(data);
-      window.location.href = "checkorder.html";
-    });
-}
-
-const form = document.querySelector("#registerform");
-form.setAttribute("novalidate", true);
-
-form.addEventListener("submit", e => {
+registerForm.addEventListener("submit", e => {
   e.preventDefault();
-  form.elements.submit.disabled = true;
-
-  console.log("submitted");
-
-  let marketingStatus = checkMarketing();
-  function checkMarketing() {
-    if (form.elements.marketing.checked) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  registerForm.elements.submit.disabled = true;
 
   const submittedAccount = {
-    email: form.elements.email.value,
-    password: form.elements.password.value,
-    fullname: form.elements.fullname.value,
-    country: form.elements.country.value,
-    phoneno: form.elements.phoneno.value,
-    marketing: marketingStatus
+    email: registerForm.elements.email.value,
+    password: registerForm.elements.password.value,
+    fullname: registerForm.elements.fullname.value,
+    country: registerForm.elements.country.value,
+    phoneno: registerForm.elements.phoneno.value,
+    marketing: registerForm.elements.marketing.checked,
+    newuser: true
   };
 
-  if (form.reportValidity() == true) {
-    post(submittedAccount);
+  if (registerForm.reportValidity() == true) {
+    //store userdata in localstorage
+    window.localStorage.setItem(
+      "userAccount",
+      JSON.stringify(submittedAccount)
+    );
+    window.location.href = "checkorder.html";
   } else {
-    form.elements.submit.disabled = false;
+    registerForm.elements.submit.disabled = false;
   }
-  console.log(form.reportValidity());
+  console.log("registerForm validity:" + registerForm.reportValidity());
+});
+
+const loginForm = document.querySelector("#loginform");
+loginForm.setAttribute("novalidate", true);
+
+loginForm.addEventListener("submit", e => {
+  e.preventDefault();
+  loginForm.elements.submit.disabled = true;
+
+  const submittedAccount = {
+    email: loginForm.elements.email.value,
+    password: loginForm.elements.password.value,
+    newuser: false
+  };
+
+  if (loginForm.reportValidity() == true) {
+    //store userdata in localstorage
+    window.localStorage.setItem(
+      "userAccount",
+      JSON.stringify(submittedAccount)
+    );
+    window.location.href = "checkorder.html";
+  } else {
+    loginForm.elements.submit.disabled = false;
+  }
+  console.log("registerForm validity:" + loginForm.reportValidity());
 });

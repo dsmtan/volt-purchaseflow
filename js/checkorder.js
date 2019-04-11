@@ -13,39 +13,44 @@ const powerTotal = document.querySelector("#powertotal");
 const totalSum = document.querySelector("#totalsum");
 const totalVAT = document.querySelector("#totalvat");
 
-let quantityObj;
-
-//fetch quantities
-function getQuantities() {
-  fetch(
-    "https://denisekea-93a9.restdb.io/rest/volt-quantities?sort=_created&dir=-1&max=1",
-    {
-      method: "get",
-      headers: {
-        "content-type": "application/json; charset=utf-8",
-        "x-apikey": "5c85985ecac6621685acbd92",
-        "cache-control": "no-cache"
-      }
-    }
-  )
-    .then(res => res.json())
-    .then(data => {
-      quantityObj = data[0];
-      updateTotals(quantityObj);
-    });
-}
-
-getQuantities();
-
-//when ship home is checked add price to order
-
 const pickupInput = document.querySelector("#freepickup");
 const shipInput = document.querySelector("#shiphome");
 const shipSum = document.querySelector("#shippingprice");
 const addressInfo = document.querySelector("#shippinginfo");
 
-//default number instead of string shipping price
+const streetInput = document.querySelector("#shipaddress1");
+const zipInput = document.querySelector("#shipaddress2");
+const cityInput = document.querySelector("#shipaddress3");
+
+let swapPrice;
+let powerPrice;
+let totalPrice;
+let vatPrice;
 let shipPrice = 0;
+
+let completeOrder;
+let swapQuantity;
+let powerQuantity;
+let userData;
+
+//fetch userdata from localstorage
+function getUser() {
+  userData = JSON.parse(window.localStorage.getItem("userAccount"));
+  getQuantities();
+}
+
+getUser();
+
+//fetch quantities from localstorage
+function getQuantities() {
+  const quantityObj = JSON.parse(window.localStorage.getItem("qtyObject"));
+  swapQuantity = parseInt(quantityObj.swapquantity);
+  powerQuantity = parseInt(quantityObj.powerquantity);
+  console.log(swapQuantity, powerQuantity);
+  updateTotals(swapQuantity, powerQuantity);
+}
+
+//when ship home is checked add price to order and show address fields
 
 pickupInput.addEventListener("click", checkShipping);
 shipInput.addEventListener("click", checkShipping);
@@ -54,26 +59,20 @@ function checkShipping() {
   if (shipInput.checked) {
     shipPrice = 50;
     addressInfo.classList.remove("hide");
-    updateTotals(quantityObj);
+    updateTotals(swapQuantity, powerQuantity);
   } else {
     shipPrice = 0;
     addressInfo.classList.add("hide");
-    updateTotals(quantityObj);
+    updateTotals(swapQuantity, powerQuantity);
   }
 }
 
-let swapPrice;
-let powerPrice;
-let totalPrice;
-let vatPrice;
-let completeOrder;
+function updateTotals(swapQuantity, powerQuantity) {
+  swapNumber.textContent = swapQuantity;
+  powerNumber.textContent = powerQuantity;
 
-function updateTotals(quantityObj) {
-  swapNumber.textContent = quantityObj.swapquantity;
-  powerNumber.textContent = quantityObj.powerquantity;
-
-  swapPrice = quantityObj.swapquantity * 179;
-  powerPrice = quantityObj.powerquantity * 200;
+  swapPrice = swapQuantity * 179;
+  powerPrice = powerQuantity * 200;
 
   swapTotal.textContent = swapPrice + " DKK";
   powerTotal.textContent = powerPrice + " DKK";
@@ -85,38 +84,33 @@ function updateTotals(quantityObj) {
   totalSum.textContent = totalPrice + " DKK";
   totalVAT.textContent = vatPrice + " DKK";
 
-  getAddress();
+  getOrder();
 }
 
-const streetInput = document.querySelector("#shipaddress1");
-const zipInput = document.querySelector("#shipaddress2");
-const cityInput = document.querySelector("#shipaddress3");
+streetInput.addEventListener("change", getOrder);
+zipInput.addEventListener("change", getOrder);
+cityInput.addEventListener("change", getOrder);
 
-streetInput.addEventListener("change", getAddress);
-zipInput.addEventListener("change", getAddress);
-cityInput.addEventListener("change", getAddress);
+function getOrder() {
+  completeOrder = {
+    totalswap: swapPrice + " DKK",
+    totalpower: powerPrice + " DKK",
+    totalship: shipPrice + " DKK",
+    totalamount: totalPrice + " DKK",
+    totalvatsum: vatPrice + " DKK",
+    shippingaddress: `${streetInput.value}, ${zipInput.value} ${
+      cityInput.value
+    } `,
+    email: userData.email,
+    password: userData.password,
+    fullname: userData.fullname,
+    country: userData.country,
+    phoneno: userData.phoneno,
+    marketing: userData.marketing,
+    newuser: userData.newuser
+  };
 
-function getAddress() {
-  if (streetInput.value.length > 0) {
-    completeOrder = {
-      totalswap: swapPrice + " DKK",
-      totalpower: powerPrice + " DKK",
-      totalship: shipPrice + " DKK",
-      totalamount: totalPrice + " DKK",
-      totalvatsum: vatPrice + " DKK",
-      shippingaddress: `${streetInput.value}, ${zipInput.value} ${
-        cityInput.value
-      } `
-    };
-  } else {
-    completeOrder = {
-      totalswap: swapPrice + " DKK",
-      totalpower: powerPrice + " DKK",
-      totalship: shipPrice + " DKK",
-      totalamount: totalPrice + " DKK",
-      totalvatsum: vatPrice + " DKK"
-    };
-  }
+  console.log(completeOrder);
 }
 
 function post(newOrder) {
